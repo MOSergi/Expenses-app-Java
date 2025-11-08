@@ -1,2 +1,2 @@
 # Expenses-app-Java
-This is the backend for a simple expenses app
+This is the backend for a simple expenses app.
