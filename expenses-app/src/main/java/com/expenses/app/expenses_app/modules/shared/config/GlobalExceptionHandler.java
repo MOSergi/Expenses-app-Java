@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.expenses.app.expenses_app.modules.auth.errors.InvalidUsernameOrPasswordException;
 import com.expenses.app.expenses_app.modules.shared.errors.InvalidTokenException;
 import com.expenses.app.expenses_app.modules.shared.utils.ErrorFormater;
 import com.expenses.app.expenses_app.modules.users.errors.UserAlreadyExistsException;
@@ -68,6 +69,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .body(generateErrorFormat(409, LocalDateTime.now(), exception.getMessage()));
+    }
+
+    @ExceptionHandler({ InvalidUsernameOrPasswordException.class })
+     public ResponseEntity<Object> handleInvalidUsernamePasswordException(InvalidUsernameOrPasswordException exception) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(generateErrorFormat(401, LocalDateTime.now(), exception.getMessage()));
     }
 
     private ErrorFormater generateErrorFormat(Integer code, LocalDateTime timestamp, String message){

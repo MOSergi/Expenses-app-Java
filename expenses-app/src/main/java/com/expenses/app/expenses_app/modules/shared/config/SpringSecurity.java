@@ -39,7 +39,7 @@ public class SpringSecurity {
         http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth ->
             auth.requestMatchers(HttpMethod.POST, "/users").permitAll()
-            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
             .anyRequest().authenticated()
         )    
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
